@@ -10,7 +10,7 @@ create table org (
 	org_id int unsigned not null auto_increment,
     org_abbreviation varchar(5) not null,
     ad_road varchar(15),
-    ad_number int,
+    ad_number int unsigned,
     postcode numeric(5,0),
 	city varchar(10) not null,
     -- category enum('University', 'Research Center', 'Company') not null, 
@@ -26,7 +26,7 @@ create table researcher (
     org_id int unsigned not null,
     work_date date,
     project_id int unsigned not null,
-    age int,
+    age int unsigned,
     primary key (researcher_id),
     key idx_fk_org_id (org_id),
     constraint `fk_res_org` foreign key (org_id) references org (org_id) on delete restrict on update cascade ,
@@ -42,7 +42,7 @@ create table executive (
 
 create table organization_phones (
 	org_id int unsigned not null auto_increment,
-    phone_number numeric(10,0) not null,
+    phone_number numeric(10,0) not null unique,
     primary key (org_id, phone_number),
     constraint `fk_org_phones` foreign key (org_id) references org (org_id) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
@@ -65,10 +65,10 @@ create table project (
 	project_id int unsigned not null auto_increment,
     project_title varchar(30) not null,
     summary varchar(60) default null,
-    fund_amount int,
-    start_date datetime,
-    end_date datetime,
-    duration int,
+    fund_amount int unsigned,
+    start_date date,
+    end_date date,
+    duration int unsigned,
     sup_researcher_id int unsigned not null,
     org_id int unsigned not null,
     field_id int unsigned not null,
@@ -92,7 +92,7 @@ create table deliverable (
 	del_id int unsigned not null auto_increment,
     project_id int unsigned not null,
     del_title varchar(30) not null,
-    del_summary varchar(60),
+    del_summary varchar(60) default null,
     del_date date,
     primary key (del_id),
     constraint `fk_del_proj` foreign key (project_id) references project (project_id) on delete restrict on update cascade
@@ -110,7 +110,7 @@ create table university (
 	university_id int unsigned not null auto_increment,
     org_id int unsigned not null,
     -- category enum('University') not null,
-    budget int,
+    budget int unsigned,
     primary key (university_id),
     -- constraint `fk_uni_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 	constraint `fk_uni_org` foreign key (org_id) references org (org_id) on delete cascade on update cascade
@@ -120,8 +120,8 @@ create table research_center (
 	rcenter_id int unsigned not null auto_increment,
     org_id int unsigned not null,
 	-- category enum('Research Center') not null,
-    ministry_budget int,
-    private_budget int,
+    ministry_budget int unsigned,
+    private_budget int unsigned,
     primary key (rcenter_id),
 	-- constraint `fk_rcenter_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 	constraint `fk_rcenter_org` foreign key (org_id) references org (org_id) on delete cascade on update cascade
@@ -131,7 +131,7 @@ create table company (
 	company_id int unsigned not null auto_increment,
     org_id int unsigned not null,
 	-- category enum('Company') not null,
-    equity int,
+    equity int unsigned,
     primary key (company_id),
 	-- constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
      constraint `fk_comp_org` foreign key (org_id) references org (org_id) on delete cascade on update cascade
