@@ -25,15 +25,13 @@ create table researcher (
     researcher_name varchar(15) not null,
     researcher_surname varchar(15) not null,
     sex char(1) default null,
-    birth_date date default null,
+    birth_date date not null,
     org_id int unsigned not null,
     work_date date default null,
-    project_id int unsigned not null,
     age int unsigned default null,
     primary key (researcher_id),
     key idx_res_full_name (researcher_name, researcher_surname),
     key idx_fk_org_id (org_id),
-    key idx_fk_proj_id (project_id),
     constraint `fk_res_org` foreign key (org_id) references org (org_id) on delete restrict on update cascade ,
 	check (sex in ('M','F','O'))
 ) engine = InnoDB default charset = utf8;
@@ -72,18 +70,18 @@ create table project (
 	project_id int unsigned not null auto_increment,
     project_title varchar(30) not null,
     summary varchar(60) default null,
-    fund_amount int unsigned,
-    start_date date,
-    end_date date,
-    duration int unsigned,
+    fund_amount int unsigned default 0,
+    start_date date not null,
+    end_date date not null,
+    duration int unsigned default null,
     sup_researcher_id int unsigned not null,
     org_id int unsigned not null,
     field_id int unsigned not null,
-    program_id int unsigned not null,
+    program_id int unsigned default null,
     executive_id int unsigned not null,
     eval_researcher_id int unsigned not null,
-    evaluation_grade numeric(2,1),
-    evaluation_date date,
+    evaluation_grade numeric(2,1) default null,
+    evaluation_date date default null,
     primary key (project_id),
     key idx_sup_id (sup_researcher_id),
     key idx_org_id (org_id),
@@ -106,7 +104,7 @@ create table deliverable (
     project_id int unsigned not null,
     del_title varchar(30) not null,
     del_summary varchar(60) default null,
-    del_date date,
+    del_date date not null,
     primary key (del_id, project_id),
     key idx_del_proj_id (project_id),
     constraint `fk_del_proj` foreign key (project_id) references project (project_id) on delete restrict on update cascade
@@ -124,7 +122,7 @@ create table university (
 	university_id int unsigned not null auto_increment,
     org_id int unsigned not null,
     category enum('University') not null,
-    budget int unsigned,
+    budget int unsigned not null,
     primary key (university_id),
     key idx_uni_org_id (org_id),
     constraint `fk_uni_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
@@ -135,7 +133,7 @@ create table research_center (
     org_id int unsigned not null,
 	category enum('Research Center') not null,
     ministry_budget int unsigned,
-    private_budget int unsigned,
+    private_budget int unsigned not null,
     primary key (rcenter_id),
     key idx_rc_org_id (org_id),
 	constraint `fk_rcenter_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
@@ -145,7 +143,7 @@ create table company (
 	company_id int unsigned not null auto_increment,
     org_id int unsigned not null,
 	category enum('Company') not null,
-    equity int unsigned,
+    equity int unsigned not null,
     primary key (company_id),
     key idx_comp_org_id (org_id),
 	constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
@@ -161,8 +159,8 @@ create trigger `ins_workson` before insert on `researcher_works_on` for each row
 	select project_id, eval_researcher_id
     into pr_id, eval_res_id
     from project
-    where project.project_id = new.project_id;
-    if  new.researcher_id = project.eval_researcher_id then
+    where project_id = new.project_id;
+    if  new.researcher_id = eval_res_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot add this relationship';
     end if; 
@@ -175,7 +173,7 @@ create trigger `upd_workson` before update on `researcher_works_on` for each row
     into pr_id, eval_res_id
     from project
     where project.project_id = new.project_id;
-    if  new.researcher_id = project.eval_researcher_id then
+    if  new.researcher_id = eval_res_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot update this relationship';
     end if; 
@@ -212,13 +210,7 @@ create trigger `upd_workson2` before update on `researcher_works_on` for each ro
   end;;
   
 create trigger `ins_proj` before insert on `project` for each row begin
-	declare sup_res_id int unsigned;
-	declare eval_res_id int unsigned;
-	select sup_researcher_id, eval_researcher_id
-    into sup_res_id, eval_res_id
-    from project
-    where project.sup_researcher_id = new.sup_researcher_id or project.eval_researcher_id = new.eval_researcher_id;
-    if  new.sup_researcher_id = project.eval_researcher_id or new.eval_researcher_id = project.sup_researcher_id then
+    if  new.sup_researcher_id = new.eval_researcher_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot add this project';
     end if; 
@@ -231,7 +223,7 @@ create trigger `upd_proj` before update on `project` for each row begin
     into sup_res_id, eval_res_id
     from project
     where project.sup_researcher_id = new.sup_researcher_id or project.eval_researcher_id = new.eval_researcher_id;
-    if  new.sup_researcher_id = project.eval_researcher_id or new.eval_researcher_id = project.sup_researcher_id then
+    if  new.sup_researcher_id = eval_res_id or new.eval_researcher_id = sup_res_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot update this project';
     end if; 
