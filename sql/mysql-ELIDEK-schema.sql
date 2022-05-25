@@ -70,7 +70,7 @@ create table project (
 	project_id int unsigned not null auto_increment,
     project_title varchar(30) not null,
     summary varchar(60) default null,
-    fund_amount int unsigned default 0,
+    fund_ammount int unsigned default 0,
     start_date date not null,
     end_date date not null,
     duration int unsigned default null,
