@@ -34,7 +34,7 @@ create table researcher (
     primary key (researcher_id),
     key idx_res_full_name (researcher_name, researcher_surname),
     key idx_fk_org_id (org_id),
-    constraint `fk_res_org` foreign key (org_id) references org (org_id) on delete restrict on update cascade ,
+    constraint `fk_res_org` foreign key (org_id) references org (org_id) on delete restrict on update cascade,
 	check (sex in ('M','F','O'))
 ) engine = InnoDB default charset = utf8;
 
@@ -65,7 +65,7 @@ create table program (
     program_title varchar(60) not null,
     department varchar(20) not null,
     primary key (program_id),
-    key idx_fk_prog_title (program_title)
+    key idx_prog_title (program_title)
 ) engine = InnoDB default charset = utf8;
 
 create table project (
@@ -78,7 +78,6 @@ create table project (
     duration int unsigned as (datediff (end_date, start_date)),
     sup_researcher_id int unsigned not null,
     org_id int unsigned not null,
-    field_id int unsigned not null,
     program_id int unsigned default null,
     executive_id int unsigned not null,
     eval_researcher_id int unsigned not null,
@@ -87,16 +86,14 @@ create table project (
     primary key (project_id),
     key idx_sup_id (sup_researcher_id),
     key idx_org_id (org_id),
-    key idx_field_id (field_id),
     key idx_prog_id (program_id),
     key idx_exec_id (executive_id),
     key idx_eval_id (eval_researcher_id),
-    constraint fk_proj_sup foreign key (sup_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
+    constraint `fk_proj_sup` foreign key (sup_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
     constraint `fk_proj_org` foreign key (org_id) references org (org_id) on delete restrict on update cascade,
-    constraint `fk_proj_field` foreign key (field_id) references scientific_field (field_id) on delete restrict on update cascade,
 	constraint `fk_proj_program` foreign key (program_id) references program (program_id) on delete restrict on update cascade,
     constraint `fk_proj_exec` foreign key (executive_id) references executive (executive_id) on delete restrict on update cascade,
-	constraint fk_proj_eval foreign key (eval_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
+	constraint `fk_proj_eval` foreign key (eval_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
     check (fund_ammount >= 100000 and fund_ammount <= 1000000),
     check (duration >= 365 and duration <= 1461)
 ) engine = InnoDB default charset = utf8;
@@ -151,7 +148,16 @@ create table company (
 	constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
 
+create table project_field (
+	project_id int unsigned not null,
+    field_id int unsigned not null,
+    primary key (project_id, field_id),
+    constraint `fk_field_proj` foreign key (project_id) references project (project_id) on delete cascade on update cascade,
+    constraint `fk_proj_field` foreign key (field_id) references scientific_field (field_id) on delete cascade on update cascade    
+) engine = InnoDB default charset = utf8;
+
 delimiter ;;
+
 create trigger `ins_workson` before insert on `researcher_works_on` for each row begin
 	declare pr_id int unsigned;
 	declare eval_res_id int unsigned;
