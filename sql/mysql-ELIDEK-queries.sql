@@ -1,9 +1,6 @@
+-- 25/05 Version
+
 use ELIDEK;
-
-
--- from project 
-
-
 
 
 delimiter ;;
