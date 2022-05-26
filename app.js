@@ -18,8 +18,9 @@ app.set('views', 'views');
 app.get('/', (req, res) => res.send('Node App is running!'));
 app.use('/researcher', researcher);
 
+
 // in case an endpoint does not exist must return 404.html
 app.use((req, res, next) => { res.status(404).render('404.ejs', { pageTitle: '404' }) })
 
 
-module.exports = app
+module.exports = app;
