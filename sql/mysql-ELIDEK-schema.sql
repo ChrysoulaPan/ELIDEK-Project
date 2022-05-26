@@ -1,4 +1,4 @@
--- 25/05 Version
+-- 26/05 Version
 
 set @old_unique_checks = @@unique_checks, unique_checks = 0;
 set @old_foreign_key_checks = @@foreign_key_checks, foreign_key_checks = 0; 
@@ -10,12 +10,12 @@ use ELIDEK;
 
 create table org (
 	org_id int unsigned not null auto_increment,
-    org_name varchar(15) not null,
+    org_name varchar(35) not null,
     org_abbreviation varchar(5) not null,
     ad_road varchar(15),
     ad_number int unsigned,
     postcode numeric(5,0),
-	city varchar(10) not null,
+	city varchar(20) not null,
     category enum('University', 'Research Center', 'Company') not null, 
     primary key (org_id)
 ) engine = InnoDB default charset = utf8;
@@ -30,7 +30,7 @@ create table researcher (
     birth_date date not null,
     org_id int unsigned not null,
     work_date date default null,
-    age int unsigned default null,
+    age int unsigned as (datediff (curdate(), birth_date)),
     primary key (researcher_id),
     key idx_res_full_name (researcher_name, researcher_surname),
     key idx_fk_org_id (org_id),
@@ -56,13 +56,13 @@ create table organization_phones (
 create table scientific_field (
 	field_id int unsigned not null auto_increment,
     field_name varchar(30) not null,
-    discription varchar(50) default null,
+    descript varchar(100) default null,
     primary key (field_id)
 ) engine = InnoDB default charset = utf8;
 
 create table program (
 	program_id int unsigned not null auto_increment, 
-    program_title varchar(30) not null,
+    program_title varchar(60) not null,
     department varchar(20) not null,
     primary key (program_id),
     key idx_fk_prog_title (program_title)
@@ -71,11 +71,11 @@ create table program (
 create table project (
 	project_id int unsigned not null auto_increment,
     project_title varchar(30) not null,
-    summary varchar(60) default null,
+    summary varchar(100) default null,
     fund_ammount int unsigned default 0,
     start_date date not null,
     end_date date not null,
-    duration int unsigned default null,
+    duration int unsigned as (datediff (end_date, start_date)),
     sup_researcher_id int unsigned not null,
     org_id int unsigned not null,
     field_id int unsigned not null,
@@ -97,7 +97,7 @@ create table project (
 	constraint `fk_proj_program` foreign key (program_id) references program (program_id) on delete restrict on update cascade,
     constraint `fk_proj_exec` foreign key (executive_id) references executive (executive_id) on delete restrict on update cascade,
 	constraint fk_proj_eval foreign key (eval_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
-    check (fund_amount >= 100000 and fund_amount <= 1000000),
+    check (fund_ammount >= 100000 and fund_ammount <= 1000000),
     check (duration >= 365 and duration <= 1461)
 ) engine = InnoDB default charset = utf8;
 
@@ -105,7 +105,7 @@ create table deliverable (
 	del_id int unsigned not null auto_increment,
     project_id int unsigned not null,
     del_title varchar(30) not null,
-    del_summary varchar(60) default null,
+    del_summary varchar(100) default null,
     del_date date not null,
     primary key (del_id, project_id),
     key idx_del_proj_id (project_id),
@@ -123,7 +123,7 @@ create table researcher_works_on (
 create table university (
 	university_id int unsigned not null auto_increment,
     org_id int unsigned not null,
-    category enum('University') not null,
+    category enum('University') not null default 'University',
     budget int unsigned not null,
     primary key (university_id),
     key idx_uni_org_id (org_id),
@@ -133,7 +133,7 @@ create table university (
 create table research_center (
 	rcenter_id int unsigned not null auto_increment,
     org_id int unsigned not null,
-	category enum('Research Center') not null,
+	category enum('Research Center') not null default 'Research Center',
     ministry_budget int unsigned,
     private_budget int unsigned not null,
     primary key (rcenter_id),
@@ -144,15 +144,12 @@ create table research_center (
 create table company (
 	company_id int unsigned not null auto_increment,
     org_id int unsigned not null,
-	category enum('Company') not null,
+	category enum('Company') not null default 'Company',
     equity int unsigned not null,
     primary key (company_id),
     key idx_comp_org_id (org_id),
 	constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
-
-update project set duration = datediff (end_date, start_date);
-update researcher set age = datediff (curdate(), birth_date);
 
 delimiter ;;
 create trigger `ins_workson` before insert on `researcher_works_on` for each row begin
@@ -189,7 +186,7 @@ create trigger `ins_workson2` before insert on `researcher_works_on` for each ro
 	select p.project_id, p.org_id, r.org_id, r.researcher_id
     into pr_id, or1_id, or2_id, res_id
     from project p, researcher r
-    where p.project_id = new.project_id or r.researcher_id = new.researcher_id;
+    where p.project_id = new.project_id and r.researcher_id = new.researcher_id;
     if  or1_id != or2_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot add this relationship';
@@ -211,14 +208,14 @@ create trigger `upd_workson2` before update on `researcher_works_on` for each ro
     end if; 
   end;;
   
-create trigger `ins_proj` before insert on `project` for each row begin
+create trigger `ins_proj1` before insert on `project` for each row begin
     if  new.sup_researcher_id = new.eval_researcher_id then
         signal sqlstate '45000'   
-        set message_text = 'Cannot add this project';
+        set message_text = 'Cannot insert this project';
     end if; 
   end;;
   
-create trigger `upd_proj` before update on `project` for each row begin
+create trigger `upd_proj1` before update on `project` for each row begin
 	declare sup_res_id int unsigned;
 	declare eval_res_id int unsigned;
 	select sup_researcher_id, eval_researcher_id
@@ -231,31 +228,38 @@ create trigger `upd_proj` before update on `project` for each row begin
     end if; 
   end;;
   
+create trigger `ins_proj2` before insert on `project` for each row begin
+    if new.end_date < new.start_date then
+        signal sqlstate '45000'   
+        set message_text = 'Cannot insert this project';
+    end if; 
+  end;;
+  
 create trigger `ins_eval` before insert on `project` for each row begin
 	declare or1_id int unsigned;
 	declare eval_res_id int unsigned;
     declare res_id int unsigned;
     declare or2_id int unsigned;
-	select p.org_id, p.eval_researcher_id, r.researcher_id, r.org_id
+	select project.org_id, project.eval_researcher_id, researcher.researcher_id, researcher.org_id
     into or1_id, eval_res_id, res_id, or2_id 
-    from project p, researcher r
-    where p.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = r.researcher_id;
-    if r.org_id = p.org_id then
+    from project join researcher
+    where project.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = researcher.researcher_id;
+    if or1_id = or2_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot add this project';
     end if; 
   end;;
-  
+ 
 create trigger `upd_eval` before update on `project` for each row begin
 	declare or1_id int unsigned;
 	declare eval_res_id int unsigned;
     declare res_id int unsigned;
     declare or2_id int unsigned;
-	select p.org_id, p.eval_researcher_id, r.researcher_id, r.org_id
+	select project.org_id, project.eval_researcher_id, researcher.researcher_id, researcher.org_id
     into or1_id, eval_res_id, res_id, or2_id 
-    from project p, researcher r
-    where p.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = r.researcher_id;
-    if r.org_id = p.org_id then
+    from project join researcher
+    where project.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = researcher.researcher_id;
+    if or1_id = or2_id then
         signal sqlstate '45000'   
         set message_text = 'Cannot update this project';
     end if; 
@@ -270,7 +274,7 @@ create trigger `ins_eval_date` before insert on `project` for each row begin
     where project.evaluation_date = new.evaluation_date;
     if new.evaluation_date < st_date then
         signal sqlstate '45000'   
-        set message_text = 'Cannot add this project';
+        set message_text = 'Cannot insert this project';
     end if; 
   end;;
   
@@ -289,15 +293,15 @@ create trigger `upd_eval_date` before update on `project` for each row begin
 
 create trigger `ins_del_date` before insert on `deliverable` for each row begin
 	declare st_date date;
+    declare en_date date;
     declare pr1_id int unsigned; 
-    declare pr2_id int unsigned;
-	select p.start_date, p.project_id, d.project_id
-    into st_date, pr1_id, pr2_id 
-    from project p, deliverable d
-    where d.project_id = new.project_id and new.project_id = p.project_id;
-    if new.del_date < st_date then
+	select p.start_date, p.end_date, p.project_id
+	into st_date, en_date, pr1_id
+    from project p
+    where p.project_id = new.project_id;
+    if new.del_date < st_date or new.del_date > en_date then
         signal sqlstate '45000'   
-        set message_text = 'Cannot add this project';
+        set message_text = 'Cannot insert this deliverable';
     end if; 
   end;;
   
@@ -311,10 +315,17 @@ create trigger `upd_del_date` before update on `deliverable` for each row begin
     where d.project_id = new.project_id and new.project_id = p.project_id;
     if new.del_date < st_date then
         signal sqlstate '45000'   
-        set message_text = 'Cannot add this project';
+        set message_text = 'Cannot update this deliverable';
     end if; 
   end;;  
-	
+
+create trigger `upd_duration` before update on `project` for each row begin
+    if new.duration < 365 or new.duration > 1461 then
+		signal sqlstate '45000'   
+        set message_text = 'Cannot update this deliverable';
+    end if; 
+  end;;  
+
 delimiter ;
 
 set sql_mode=@old_sql_mode;
