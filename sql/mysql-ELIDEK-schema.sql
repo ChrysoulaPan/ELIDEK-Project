@@ -123,8 +123,8 @@ create table university (
     category enum('University') not null default 'University',
     budget int unsigned not null,
     primary key (university_id),
-    key idx_uni_org_id (org_id),
-    constraint `fk_uni_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
+    key idx_uni_org_id (org_id)
+    -- constraint `fk_uni_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
 
 create table research_center (
@@ -134,8 +134,8 @@ create table research_center (
     ministry_budget int unsigned,
     private_budget int unsigned not null,
     primary key (rcenter_id),
-    key idx_rc_org_id (org_id),
-	constraint `fk_rcenter_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
+    key idx_rc_org_id (org_id)
+	-- constraint `fk_rcenter_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
 
 create table company (
@@ -144,8 +144,8 @@ create table company (
 	category enum('Company') not null default 'Company',
     equity int unsigned not null,
     primary key (company_id),
-    key idx_comp_org_id (org_id),
-	constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
+    key idx_comp_org_id (org_id)
+	-- constraint `fk_comp_org` foreign key (org_id, category) references org (org_id, category) on delete cascade on update cascade
 ) engine = InnoDB default charset = utf8;
 
 create table project_field (
