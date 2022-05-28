@@ -1,4 +1,4 @@
--- 26/05 Version
+-- 28/05 Version
 
 set @old_unique_checks = @@unique_checks, unique_checks = 0;
 set @old_foreign_key_checks = @@foreign_key_checks, foreign_key_checks = 0; 
@@ -95,7 +95,8 @@ create table project (
     constraint `fk_proj_exec` foreign key (executive_id) references executive (executive_id) on delete restrict on update cascade,
 	constraint `fk_proj_eval` foreign key (eval_researcher_id) references researcher (researcher_id) on delete restrict on update cascade,
     check (fund_ammount >= 100000 and fund_ammount <= 1000000),
-    check (duration >= 365 and duration <= 1461)
+    check (duration >= 365 and duration <= 1461),
+    check (evaluation_date >= start_date and evaluation_date <= end_date)
 ) engine = InnoDB default charset = utf8;
 
 create table deliverable (
@@ -241,18 +242,17 @@ create trigger `ins_proj2` before insert on `project` for each row begin
     end if; 
   end;;
   
+/* Check if the evaluator added does not work on the organization specified in org_id */
 create trigger `ins_eval` before insert on `project` for each row begin
-	declare or1_id int unsigned;
-	declare eval_res_id int unsigned;
     declare res_id int unsigned;
-    declare or2_id int unsigned;
-	select project.org_id, project.eval_researcher_id, researcher.researcher_id, researcher.org_id
-    into or1_id, eval_res_id, res_id, or2_id 
-    from project join researcher
-    where project.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = researcher.researcher_id;
-    if or1_id = or2_id then
+	declare or_id int unsigned;
+	select researcher.researcher_id, researcher.org_id
+    into res_id, or_id 
+    from researcher
+    where new.eval_researcher_id = researcher.researcher_id;
+    if new.org_id = or_id then
         signal sqlstate '45000'   
-        set message_text = 'Cannot add this project';
+        set message_text = 'Cannot add this project due to the evaluator';
     end if; 
   end;;
  
@@ -266,32 +266,6 @@ create trigger `upd_eval` before update on `project` for each row begin
     from project join researcher
     where project.eval_researcher_id = new.eval_researcher_id and new.eval_researcher_id = researcher.researcher_id;
     if or1_id = or2_id then
-        signal sqlstate '45000'   
-        set message_text = 'Cannot update this project';
-    end if; 
-  end;;
-  
-create trigger `ins_eval_date` before insert on `project` for each row begin
-	declare st_date date;
-    declare ev_date date;
-	select start_date, evaluation_date
-    into st_date, ev_date 
-    from project
-    where project.evaluation_date = new.evaluation_date;
-    if new.evaluation_date < st_date then
-        signal sqlstate '45000'   
-        set message_text = 'Cannot insert this project';
-    end if; 
-  end;;
-  
-create trigger `upd_eval_date` before update on `project` for each row begin
-	declare st_date date;
-    declare ev_date date;
-	select start_date, evaluation_date
-    into st_date, ev_date 
-    from project
-    where project.evaluation_date = new.evaluation_date;
-    if new.evaluation_date < st_date then
         signal sqlstate '45000'   
         set message_text = 'Cannot update this project';
     end if; 
@@ -321,13 +295,6 @@ create trigger `upd_del_date` before update on `deliverable` for each row begin
     where d.project_id = new.project_id and new.project_id = p.project_id;
     if new.del_date < st_date then
         signal sqlstate '45000'   
-        set message_text = 'Cannot update this deliverable';
-    end if; 
-  end;;  
-
-create trigger `upd_duration` before update on `project` for each row begin
-    if new.duration < 365 or new.duration > 1461 then
-		signal sqlstate '45000'   
         set message_text = 'Cannot update this deliverable';
     end if; 
   end;;  

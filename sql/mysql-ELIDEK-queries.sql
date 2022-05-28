@@ -1,4 +1,4 @@
--- 26/05 Version
+-- 28/05 Version
 
 use ELIDEK;
 
@@ -34,6 +34,7 @@ order by proj_count desc
 limit 10;
 
 -- 3.7 ok
+drop view if exists top_5;
 create view top_5 as 
 select concat(e.ex_surname, ' ', e.ex_name) exec_full_name, o.org_name, sum(fund_ammount) total_fund 
 from project p
@@ -44,8 +45,17 @@ group by exec_full_name, o.org_name
 order by total_fund desc
 limit 5;
 
--- 3.8
+-- 3.8 ok
+drop view if exists no_del;
 create view no_del as 
-select r.researcher_name, r.researcher_surname from researcher r
+select p.project_id from project p
+where not exists (select d.del_id from deliverable d where p.project_id = d.project_id);
+
+drop view if exists no_del_per_res;
+create view no_del_per_res as
+select r.researcher_id, r.researcher_name, r.researcher_surname, count(*) as proj_count from researcher r
 inner join researcher_works_on rwo on rwo.researcher_id = r.researcher_id
-inner join project p on p.project_id = rwo.project_id
+inner join no_del p on p.project_id = rwo.project_id
+group by researcher_id;
+
+select * from no_del_per_res where proj_count >= 5;
