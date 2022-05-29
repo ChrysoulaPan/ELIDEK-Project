@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>ELIDEK Project</title>
+    <meta charset="utf-8">
+	<meta name="description" content="Database for ELIDEK" />
+    <meta name="keywords" content="subsidy,reasearch projects" />
+	<meta name="author" content="Team 32" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+	<!-- linnk to css files -->
+	<!-- <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/fonts.css" /> -->
+	<link rel="icon" href="https://government.gov.gr/wp-content/uploads/2018/02/rsz_logotypo_elidek.png" />
+	<!-- link to javascript files and libraries -->
+	<!-- <script type="text/javascript" src="static/js/code.js" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->	
+  </head>
+  <body>
+    <img id="backdrop-img" src="static/images/background.jpg" alt="">
+    <div id="main">
+      <header>
+        <h1>ELIDEK</h1>
+        <h2>Database for Research Projects</h2>
+        <nav>
+          <ul class="menu" id="nav">
+            <li class="selected">
+			  <a href="/">Home Page</a>
+			</li>
+            <li><a href="#">Program Dashboard</a></li>
+			  <ul>
+                <li><a href="/date">Programs per Date</a></li>
+                <li><a href="/duration">Programs per Duration</a></li>
+				<li><a href="/executive">Programs per Executive</a></li>
+              </ul>
+            <li><a href="#">Relational Views</a>
+              <ul>
+                <li><a href="/researcher_proj">Researcher' Projects</a></li>
+                <li><a href="/selected">Ours</a></li>
+              </ul>
+            </li>
+            <li><a href="/field">Scientific Field</a></li>
+			<li><a href="/same_proj">Organisations with same number of Projects</a></li>
+            <li><a href="/top_3">Field Cuples</a></li>
+			<li><a href="/young_researchers">Young Researchers</a></li>
+			<li><a href="/top_5">Elit of Executives</a></li>
+			<li><a href="/no_del">Researchers in Projects without Deliverables</a></li>
+            <li><a href="#">Contact Us</a>
+              <ul>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/jonny.alexo">Andreas Levis</a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/alexandre.kyriakakis/">Chrysoula Panigyraki</a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/christos.rs.1">Marilina Bartsioka</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div id="site_content">
+        <div class="content">
+          {%block content %}{% endblock %}
+        </div>
+      </div>
+      <footer>
+        <p>
+          Copyright &copy; Andreas Levis, Chrysoula Panigyraki, Marilina Bartsioka, 2022
+        </p>
+      </footer>
+    </div>
+    <p>&nbsp;</p>
+  </body>
+
+</html>
