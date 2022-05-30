@@ -15,7 +15,7 @@ drop view if exists projects_in_field_f;
 create view projects_in_field_f as
 select p.project_id, p.project_title from active_projects p
 inner join project_field pf on p.project_id = pf.project_id
-where pf.field_id = 1 and p.fund_ammount >= 0;
+where pf.field_id = f and p.fund_ammount >= 0;
 
 drop view if exists researchers_in_field_f;
 create view researchers_in_field_f as
@@ -23,7 +23,7 @@ select r.researcher_id, r.researcher_name, r.researcher_surname from researcher 
 inner join researcher_works_on rwo on r.researcher_id = rwo.researcher_id
 inner join active_projects p on p.project_id = rwo.project_id
 inner join project_field pf on p.project_id = pf.project_id
-where pf.field_id = 1;
+where pf.field_id = f;
 
 
 -- 3.4 ok
