@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<script>
+    function SelField() {  
+        var mylist = document.getElementById("myList");  
+        document.getElementById("selected").value = mylist.options[mylist.selectedIndex].text; 
+    } 
+</script>  
+      
+<body>  
+    <form>  
+    <b> Select the scientific field that interests you </b>  
+        <select id="myList" onchange = "SelField()">
+            <% for(var i = 0; i < ids.length; i++) { %>
+            <option value='<%= ids[i] %>'><%= names[i] %></option>
+            <% } %>
+        </select>
+    <p> Your selected scientific field is:   
+    <input type = "text" id = "selected" size = "20" </p>  
+    </form>  
+</body> 
