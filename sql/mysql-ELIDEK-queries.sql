@@ -28,12 +28,17 @@ where pf.field_id = f;
 
 -- 3.4 ok
 
-select o.org_id, o.org_name, count(*) as count_proj 
+drop view if exists annual_proj;
+create view annual_proj as
+select o.org_id, o.org_name, count(*) as c, year(p.start_date) as dates
 from org o
-inner join project p on p.org_id = o.org_id
-where year(p.start_date) = year(p.start_date) + 1
-group by org_id
-having count(*) >= 10;
+inner join project p on o.org_id = p.org_id
+group by org_id, year(p.start_date);
+
+select a.org_id, a.org_name, a.c, b.c 
+from annual_proj a, annual_proj b 
+where a.org_id = b.org_id and a.dates = b.dates + 1 
+having a.c = b.c and a.c >= 10;
 
 
 
