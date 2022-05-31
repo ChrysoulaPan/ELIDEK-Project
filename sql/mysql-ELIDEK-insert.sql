@@ -345,7 +345,7 @@ insert into project (project_id, project_title, summary, fund_ammount, start_dat
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (40, 'sociis natoque', 'feugiat et eros vestibulum ac est lacinia nisi', 114411.59, '2019-12-18', '2022-10-04', 19, 18, 30, 7, 12, 2.6, '2021-02-17');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (41, 'mauris morbi non lectus', 'vel lectus in quam fringilla rhoncus mauris', 775913.0, '2020-02-20', '2023-05-15', 58, 6, 27, 6, 82, 5.4, '2021-11-22');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (42, 'cras', 'ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra', 617020.91, '2019-03-30', '2022-04-16', 62, 14, 6, 16, 47, 7.2, '2022-01-16');
-insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (43, 'orci', 'tellus in sagittis dui vel nisl duis', 762966.48, '2019-06-11', '2020-07-18', 13, 25, 15, 15, 18, 3.5, '2019-11-03');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (43, 'orci', 'tellus in sagittis dui vel nisl duis', 762966.48, '2017-06-11', '2020-07-18', 13, 25, 15, 15, 18, 3.5, '2019-11-03');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (44, 'nunc proin', 'ante nulla justo aliquam quis turpis eget elit sodales', 538270.6, '2019-06-01', '2022-12-22', 92, 29, 13, 11, 115, 9.5, '2020-11-09');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (45, 'turpis donec posuere', 'suscipit nulla elit ac nulla sed', 606918.3, '2021-11-20', '2025-03-15', 61, 23, 18, 9, 76, 2.4, '2022-05-27');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (46, 'ante ipsum primis in', 'faucibus cursus urna ut tellus nulla ut erat', 964287.07, '2017-10-12', '2020-11-08', 10, 19, 21, 10, 99, 4.4, '2018-04-17');
@@ -359,7 +359,7 @@ insert into project (project_id, project_title, summary, fund_ammount, start_dat
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (54, 'morbi a ipsum', 'diam erat fermentum justo nec condimentum neque sapien placerat', 473649.34, '2020-12-16', '2022-11-18', 29, 16, 27, 10, 78, 1.8, '2021-10-19');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (55, 'et ultrices posuere', 'leo rhoncus sed vestibulum sit amet cursus id turpis integer', 607928.89, '2019-11-14', '2022-05-20', 80, 6, 1, 16, 87, 5.5, '2021-07-20');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (56, 'lorem ipsum', 'nullam porttitor lacus at turpis donec posuere metus vitae ipsum', 601887.31, '2021-04-09', '2023-12-03', 116, 30, 4, 14, 4, 1.5, '2022-03-01');
-insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (57, 'in hac habitasse platea', 'donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (57, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 
 insert into deliverable (del_id, project_id, del_title, del_summary, del_date) values (1, 7, 'lectus in est', 'quis odio consequat varius integer ac leo pellentesque', '2020-07-26');
 insert into deliverable (del_id, project_id, del_title, del_summary, del_date) values (2, 9, 'lectus pellentesque at', 'penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien', '2021-12-24');
@@ -478,48 +478,91 @@ values
 
 insert into university (university_id, org_id, budget) 
 values 
-(1, 3, '82902.52'),
-(2, 25, '908743.69'),
-(3, 17, '278136.34'),
-(4, 14, '25260.29'),
-(5, 9, '878169.28'),
-(6, 10, '149605.57'),
-(7, 22, '39297.56'),
-(8, 26, '592091.01'),
-(9, 30, '587305.24'),
-(10, 1, '824880.28');
+(1, 1, '82902.52'),
+(2, 4, '908743.69'),
+(3, 7, '278136.34'),
+(4, 10, '25260.29'),
+(5, 13, '878169.28'),
+(6, 16, '149605.57'),
+(7, 19, '39297.56'),
+(8, 22, '592091.01'),
+(9, 25, '587305.24'),
+(10, 28, '824880.28');
 
 insert into company (company_id, org_id, equity) 
 values 
-(1, 2, '926803.96'),
-(2, 5, '230938.37'),
-(3, 8, '348160.89'),
+(1, 3, '926803.96'),
+(2, 6, '230938.37'),
+(3, 9, '348160.89'),
 (4, 12, '350334.97'),
 (5, 15, '223460.68'),
-(6, 19, '187988.03'),
+(6, 18, '187988.03'),
 (7, 21, '117011.84'),
 (8, 24, '718762.95'),
 (9, 27, '820546.77'),
-(10, 29, '513330.62');
+(10, 30, '513330.62');
 
 insert into research_center (rcenter_id, org_id, ministry_budget, private_budget) 
 values 
-(1, 4, '444945.45', '930250.06'),
-(2, 6, '446975.78', '471590.00'),
-(3, 7, '843441.39', '485691.37'),
+(1, 2, '444945.45', '930250.06'),
+(2, 5, '446975.78', '471590.00'),
+(3, 8, '843441.39', '485691.37'),
 (4, 11, '17069.27', '789914.67'),
-(5, 13, '441425.24', '45046.80'),
-(6, 16, '836132.95', '934416.45'),
-(7, 18, '331584.56', '810270.05'),
-(8, 20, '188183.63', '207940.28'),
-(9, 23, '465686.64', '84474.23'),
-(10, 28, '522142.15', '950985.52');
+(5, 14, '441425.24', '45046.80'),
+(6, 17, '836132.95', '934416.45'),
+(7, 20, '331584.56', '810270.05'),
+(8, 23, '188183.63', '207940.28'),
+(9, 26, '465686.64', '84474.23'),
+(10, 29, '522142.15', '950985.52');
+
 
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (58, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (59, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (60, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (61, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (62, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (63, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (64, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (65, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (66, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (67, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (68, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (69, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (70, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (71, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (72, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (73, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (74, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (75, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (76, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (77, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (78, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (79, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (80, 'ffs', 'gia to 3.8', 339993.17, '2019-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (81, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (82, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (83, 'ffs', 'gia to 3.8', 339993.17, '2018-06-30', '2021-08-03', 27, 30, 10, 12, 90, 2.8, '2020-07-12');
 
-
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (84, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (85, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (86, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (87, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (88, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (89, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (90, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (91, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (92, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (93, 'ffs', 'gia to 3.4', 339993.17, '2018-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (94, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (95, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (96, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (97, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (98, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (99, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (100, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (101, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (102, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (103, 'ffs', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 
 insert into researcher_works_on (researcher_id, project_id) 
 values
