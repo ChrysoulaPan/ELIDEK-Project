@@ -9,13 +9,17 @@
     function SelField() {  
         var mylist = document.getElementById("myList");  
         document.getElementById("selected").value = mylist.options[mylist.selectedIndex].text; 
-    } 
+        var val = mylist.value;
+        var url = "/fields/" + val;        
+        document.getElementById("link").setAttribute("action", url);
+    }
 </script>  
       
 <body>  
     <form>  
     <b> Select the scientific field that interests you </b>  
-        <select id="myList" onchange = "SelField()">
+        <select id="myList" onchange = " SelField()">
+            <option> --Choose field-- </option>
             <% for(var i = 0; i < ids.length; i++) { %>
             <option value='<%= ids[i] %>'><%= names[i] %></option>
             <% } %>
@@ -23,4 +27,9 @@
     <p> Your selected scientific field is:   
     <input type = "text" id = "selected" size = "20" </p>  
     </form>  
+
+    <form id = "link">
+        <input type="submit" value="Click here to display" />
+    </form>
+
 </body> 

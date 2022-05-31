@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<h1> Projects in this field</h1>
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body" id="card">
+                <% if (proj_ids.length == 0) { %> 
+                    <p>No projects found in this field!</p>
+                <% } else { %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i = 0; i < proj_ids.length; i++) { %>
+                                    <tr>
+                                        <td><%= proj_ids[i] %></td>
+                                        <td><%= proj_titles[i] %></td>
+
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1> Researchers in this field</h1>
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body" id="card">
+                <% if (res_ids.length == 0) { %> 
+                    <p>No researchers found in this field!</p>
+                <% } else { %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i = 0; i < res_ids.length; i++) { %>
+                                    <tr>
+                                        <td><%= res_ids[i] %></td>
+                                        <td><%= res_names[i] %></td>
+                                        <td><%= res_surnames[i] %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p></p>
+<form action = "/fields">
+    <input type="submit" value="Click here to go back" />
+</form>
