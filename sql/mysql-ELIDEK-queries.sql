@@ -3,6 +3,38 @@
 use ELIDEK;
 
 
+-- 3.1 ok
+
+-- data x,a,d,k will be given from user
+drop view if exists proj;
+create view proj as
+select p.project_id, p.project_title, rwo.researcher_id, r.researcher_name, r.researcher_surname
+from project p
+inner join researcher_works_on rwo on rwo.project_id = p.project_id
+inner join researcher r on r.researcher_id = rwo.researcher_id
+where p.project_id = x or p.executive_id = a or p.start_date = d or p.duration = k; 
+
+-- 3.2 ok
+-- researcher_id x given by user
+
+drop view if exists project_per_res;
+create view projects_per_res as
+select p.project_id, p.project_title, p.fund_ammount
+from active_projects p
+inner join researcher_works_on rwo on p.project_id = rwo.project_id
+where rwo.researcher_id = x; 
+
+-- org_id y given by user
+
+drop view if exists programs_per_org;
+create view programs_per_org as
+select p.program_id, p.program_title, p.department
+from program p
+inner join project r on r.program_id = p.program_id
+inner join org o on o.org_id = r.org_id
+where r.org_id = y; 
+
+
 -- 3.3 ok
 -- field_id f given by user
 drop view if exists active_projects;
@@ -15,7 +47,7 @@ drop view if exists projects_in_field_f;
 create view projects_in_field_f as
 select p.project_id, p.project_title from active_projects p
 inner join project_field pf on p.project_id = pf.project_id
-where pf.field_id = f and p.fund_ammount >= 0;
+where pf.field_id = 1 and p.fund_ammount >= 0;
 
 drop view if exists researchers_in_field_f;
 create view researchers_in_field_f as
@@ -23,23 +55,21 @@ select r.researcher_id, r.researcher_name, r.researcher_surname from researcher 
 inner join researcher_works_on rwo on r.researcher_id = rwo.researcher_id
 inner join active_projects p on p.project_id = rwo.project_id
 inner join project_field pf on p.project_id = pf.project_id
-where pf.field_id = f;
+where pf.field_id = 1;
 
 
 -- 3.4 ok
-
 drop view if exists annual_proj;
 create view annual_proj as
-select o.org_id, o.org_name, count(*) as c, year(p.start_date) as dates
+select o.org_id, o.org_name, count(*) as projects, year(p.start_date) as dates
 from org o
 inner join project p on o.org_id = p.org_id
 group by org_id, year(p.start_date);
 
-select a.org_id, a.org_name, a.c, b.c 
+select a.org_id, a.org_name, a.projects, b.projects 
 from annual_proj a, annual_proj b 
 where a.org_id = b.org_id and a.dates = b.dates + 1 
-having a.c = b.c and a.c >= 10;
-
+having a.projects = b.projects and a.projects >= 10;
 
 
 -- 3.5 ok
