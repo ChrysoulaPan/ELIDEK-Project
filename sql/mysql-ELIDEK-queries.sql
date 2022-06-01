@@ -12,7 +12,7 @@ select p.project_id, p.project_title, rwo.researcher_id, r.researcher_name, r.re
 from project p
 inner join researcher_works_on rwo on rwo.project_id = p.project_id
 inner join researcher r on r.researcher_id = rwo.researcher_id
-where p.project_id = x or p.executive_id = a or p.start_date = d or p.duration = k; 
+where p.project_id = x or p.executive_id = a or year(p.start_date) = d or (p.duration > 1 and p.duration < 2) or (p.duration > 2 and p.duration < 3) or (p.duration > 3 and p.duration < 4) ; 
 
 -- 3.2 ok
 -- researcher_id x given by user
