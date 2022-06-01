@@ -227,14 +227,14 @@ values
 
 insert into program (program_id, program_title, department) 
 values 
-(1, 'In hac habitasse platea dictumst.', 'Accounting'),
-(2, 'Nullam sit amet turpis elementum ligula vehicula consequat.', 'Sales'),
-(3, 'Nam dui.', 'Services'),
-(4, 'Cras pellentesque volutpat dui.', 'Human Resources'),
-(5, 'Vestibulum sed magna at nunc commodo placerat.', 'Support'),
-(6, 'Aenean sit amet justo.', 'Marketing'),
-(7, 'Aliquam non mauris.', 'Sales'),
-(8, 'Aliquam sit amet diam in magna bibendum imperdiet.', 'Accounting'),
+(1, 'Modern economy', 'Accounting'),
+(2, 'Best strategies for sales', 'Sales'),
+(3, 'Helping services', 'Services'),
+(4, 'Environmental health', 'Resources'),
+(5, 'Constructions and architecture', 'Mechanics'),
+(6, 'What market needs today?', 'Marketing'),
+(7, 'Ecological materials', 'Chemistry'),
+(8, 'Economical strategies', 'Economy'),
 (9, 'Vestibulum ante ipsum primis in cubilia Curae.', 'Services'),
 (10, 'Maecenas rhoncus aliquam lacus.', 'Support');
 
