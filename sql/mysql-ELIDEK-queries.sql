@@ -57,7 +57,7 @@ select r.researcher_id, r.researcher_name, r.researcher_surname from researcher 
 inner join researcher_works_on rwo on r.researcher_id = rwo.researcher_id
 inner join active_projects p on p.project_id = rwo.project_id
 inner join project_field pf on p.project_id = pf.project_id
-where pf.field_id = 1;
+where pf.field_id = f;
 
 
 -- 3.4 ok
