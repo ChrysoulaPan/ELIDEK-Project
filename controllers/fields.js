@@ -11,7 +11,7 @@ exports.getFields = (req, res, next) => {
         }
         //console.log(name_array);
         res.render('fields.ejs', {
-            pageTitle: "Fields"
+            pageTitle: "Fields",
             ids: id_array,
             names: name_array,
         });
