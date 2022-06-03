@@ -10,7 +10,9 @@ const no_del = require('./router/no_del');
 const fields = require('./router/fields');
 const annual = require('./router/annual_proj');
 const tuples = require('./router/tuples');
-//const dash = require('/router/dash');
+const dash = require('./router/dash');
+const res_view = require('./router/res_view');
+const org_view = require('./router/org_view');
 
 
 //start the express app
@@ -31,7 +33,9 @@ app.use('/nodeliverables', no_del);
 app.use('/fields', fields);
 app.use('/annual_proj', annual);
 app.use('/tuples', tuples);
-//app.use('/dashboard', dash);
+app.use('/dashboard', dash);
+app.use('/res_view', res_view);
+app.use('/org_view', org_view);
 
 
 // in case an endpoint does not exist must return 404.html
