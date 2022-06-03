@@ -11,6 +11,7 @@ const fields = require('./router/fields');
 const annual = require('./router/annual_proj');
 const tuples = require('./router/tuples');
 const dash = require('./router/dash');
+const programs = require('./router/programs');
 const res_view = require('./router/res_view');
 const org_view = require('./router/org_view');
 
@@ -25,7 +26,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //import middlewares
-app.get('/', (req, res) => res.render('website.ejs')); 
+app.get('/', (req, res) => res.render('website.ejs'));  
 app.use('/researchers', researchers);
 app.use('/executives', executives);
 app.use('/young', young_res);
@@ -34,6 +35,7 @@ app.use('/fields', fields);
 app.use('/annual_proj', annual);
 app.use('/tuples', tuples);
 app.use('/dashboard', dash);
+app.use('/programs', programs);
 app.use('/res_view', res_view);
 app.use('/org_view', org_view);
 
