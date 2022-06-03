@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>ELIDEK Project</title>
+        <meta charset="utf-8">
+	    <meta name="description" content="Database for ELIDEK" />
+        <meta name="keywords" content="subsidy,reasearch projects" />
+	    <meta name="author" content="Team 32" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+	    <link rel="icon" href="https://government.gov.gr/wp-content/uploads/2018/02/rsz_logotypo_elidek.png" />
+	    <!-- link to javascript files and libraries -->
+	    <!-- <script type="text/javascript" src="/app.js" ></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->	
+    </head>
+    <body>
+        <img id="backdrop-img" src="static/images/background.jpg" alt="">
+        <div id="main">
+            <header>
+                <h1>ELIDEK</h1>
+                <h2>Database for Research Projects</h2>
+                <nav>
+                    <ul class="menu" id="nav">
+                        <li class="selected">
+                            <a href="/">Home Page</a>
+                        </li>
+                        <li><a href="/dashboard">Program Dashboard</a></li>
+                        <li><a href="#">Relational Views</a>
+                            <ul>
+                                <li><a href="/res_sel">Researcher' Projects</a></li>
+                                <li><a href="/org_sel">Organization' Programms</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/fields">Scientific Field</a></li>
+			            <li><a href="/annual_proj">Organizations with same number of Projects</a></li>
+                        <li><a href="/tuples">Field Cuples</a></li>
+			            <li><a href="/young_res">Young Researchers</a></li>
+			            <li><a href="/executive">Elit of Executives</a></li>
+			            <li><a href="/no_del">Researchers in Projects without Deliverables</a></li>
+                        <li><a href="#">Contact Us</a>
+                            <ul>
+                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/people/%CE%91%CE%BD%CE%B4%CF%81%CE%AD%CE%B1%CF%82-%CE%9B%CE%B5%CE%B2%CE%AE%CF%82/100008080951830">Andreas Levis</a></li>
+                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/chrysoula-panigyraki-64a86b1a2">Chrysoula Panigyraki</a></li>
+                                <li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/marilina-bartsioka-629830202">Marilina Bartsioka</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <div id="site_content">
+                <div class="content">
+                    {%block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>
+                Copyright &copy; Andreas Levis, Chrysoula Panigyraki, Marilina Bartsioka, 2022
+            </p>
+        </footer>
+        <p>&nbsp;</p>
+    </body>
+
+</html>
