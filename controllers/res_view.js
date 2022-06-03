@@ -10,7 +10,7 @@ exports.getResearchers = (req, res, next) => {
             name_array.push(rows[i].researcher_full_name );
         }
         res.render('res_sel.ejs', {
-            pageTitle: "Researchers Page",
+            pageTitle: "Res Page",
             ids: id_array,
             names: name_array,
         });
