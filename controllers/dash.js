@@ -3,21 +3,12 @@ const { pool } = require('../config/config');
 exports.getDashboard = (req, res, next) => {
 
     let eid_array = [], name_array = [];
-    let eval_array = [], eval_pr_array = [];
-    let prid_array = [], pr_title_array = [], year_array = [], dur_array = [];
-    let pmid_array = [], title_array = [];
+    let prid_array = [], pr_title_array = [], year_array = [], dur_array = [], ex_array = [];
 
     const setExecutives = (rows) => {
         for (var i = 0; i < rows.length; i++) {
             eid_array.push(rows[i].executive_id);
             name_array.push(rows[i].exec_full_name);
-        }
-    }
-
-    const setEval = (rows) => {
-        for (var i = 0; i < rows.length; i++) {
-            eval_array.push(rows[i].eval_year);
-            eval_pr_array.push(rows[i].program_id);
         }
     }
 
@@ -27,35 +18,22 @@ exports.getDashboard = (req, res, next) => {
             pr_title_array.push(rows[i].project_title);
             year_array.push(rows[i].start_y);
             dur_array.push(rows[i].duration);
-        }
-    }
-
-    const setPrograms = (rows) => {
-        for (var i = 0; i < rows.length; i++) {
-            pmid_array.push(rows[i].program_id);
-            title_array.push(rows[i].program_title);
+            ex_array.push(rows[i].executive_id)
         }
         res.render('dashboard.ejs', {
             res: res,
             eids: eid_array,
             names: name_array,
-            eval: eval_array,
-            eval_pr: eval_pr_array,
             prids: prid_array,
             pr_titles: pr_title_array,
             st_y: year_array,
             dur: dur_array,
-            pmids: pmid_array,
-            titles: title_array
+            exec: ex_array
         });
     }
-    
+
     let q_exec = "SELECT executive_id, concat(ex_surname, ' ', ex_name) exec_full_name FROM executive ORDER BY executive_id";
-    let q_program = "SELECT program_id, program_title FROM program ORDER BY program_id";
-    let q_proj = "SELECT project_id, project_title, year(start_date) as start_y, duration FROM project ORDER BY project_id";
-    let q_eval = "select year(p.evaluation_date) as eval_year, pr.program_id from project p \
-    inner join program pr on p.program_id = pr.program_id \
-    order by program_id";
+    let q_proj = "SELECT project_id, project_title, year(start_date) as start_y, duration, executive_id FROM project ORDER BY project_id";
     
     pool.getConnection((err, conn) => {
         conn.query(q_exec, (err, rows) => {
@@ -68,16 +46,6 @@ exports.getDashboard = (req, res, next) => {
             setExecutives(rows);
         });
 
-        conn.query(q_eval, (err, rows) => {
-            if (err) {
-                console.log("internal error", err);
-                return;
-            }
-              
-            // This is the important function
-            setEval(rows);
-        });
-
         conn.query(q_proj, (err, rows) => {
             if (err) {
                 console.log("internal error", err);
@@ -88,14 +56,28 @@ exports.getDashboard = (req, res, next) => {
             setProjects(rows);
         });
 
-        conn.query(q_program, (err, rows) => {
-            if (err) {
-                console.log("internal error", err);
-                return;
-            }
-          
-            // This is the important function
-            setPrograms(rows);
-        });
     }); 
+}
+
+exports.showInProject = (req, res, next) => {
+
+    var value = req.params.value;
+    
+    const res_in_proj = 'select researcher_id, researcher_name, researcher_surname \
+    from researcher r \
+    inner join researcher_works_on rwo on r.researcher_id = rwo.researcher_id \
+    where rwo.project_id = ' + value;
+
+    pool.getConnection((err, conn) => {
+        
+        conn.promise().query(res_in_proj)
+        .then(([rows, fields]) => {
+            res.render('res_in_proj.ejs', {
+                pageTitle: "Researchers In Project Page",
+                researcher: rows,
+            })
+        })
+        .then(() => pool.releaseConnection(conn))
+        .catch(err => console.log(err))
+    })
 }
