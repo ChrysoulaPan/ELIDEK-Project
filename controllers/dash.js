@@ -21,7 +21,7 @@ exports.getDashboard = (req, res, next) => {
             ex_array.push(rows[i].executive_id)
         }
         res.render('dashboard.ejs', {
-            pageTitle: "Dashboard"
+            pageTitle: "Dashboard",
             res: res,
             eids: eid_array,
             names: name_array,
