@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //import middlewares
-app.get('/', (req, res) => res.render('fields.ejs'));  //εδω θα μπει το αρχειο της μαριλινας ομως σε ejs
+app.get('/', (req, res) => res.render('website.ejs')); 
 app.use('/researchers', researchers);
 app.use('/executives', executives);
 app.use('/young', young_res);
