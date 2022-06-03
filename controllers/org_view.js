@@ -10,6 +10,7 @@ exports.getOrganizations = (req, res, next) => {
             name_array.push(rows[i].org_name);
         }
         res.render('org_sel.ejs', {
+            pageTitle: "Organizations Page",
             ids: id_array,
             names: name_array,
         });
