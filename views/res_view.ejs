@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (proj.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No projects found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Funding</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% proj.forEach((proj, _) => { %>
+                                        <tr>
+                                            <td><%= proj.project_id %></td>
+                                            <td><%= proj.project_title %></td>
+                                            <td><%= proj.fund_ammount %></td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    <form action = "/res_view">
+        <input type="submit" value="Click here to go back" />
+    </form>
+</body>

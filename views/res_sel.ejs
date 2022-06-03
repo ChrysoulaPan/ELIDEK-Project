@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<script>
+    function SelResearcher() {  
+        var mylist = document.getElementById("myList");  
+        document.getElementById("selected").value = mylist.options[mylist.selectedIndex].text; 
+        var val = mylist.value;
+        var url = "/res_view/" + val;        
+        document.getElementById("link").setAttribute("action", url);
+    }
+</script>  
+      
+<body>  
+    <form>  
+    <b> Select the researcher that interests you </b>  
+        <select id="myList" onchange = " SelResearcher()">
+            <option> --Choose researcher-- </option>
+            <% for(var i = 0; i < ids.length; i++) { %>
+            <option value='<%= ids[i] %>'><%= names[i] %></option>
+            <% } %>
+        </select>
+    <p> Your selected researcher is:   
+    <input type = "text" id = "selected" size = "20" </p>  
+    </form>  
+
+    <form id = "link">
+        <input type="submit" value="Click here to display their projects" />
+    </form>
+
+</body> 
