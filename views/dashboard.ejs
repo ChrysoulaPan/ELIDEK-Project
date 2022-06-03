@@ -6,54 +6,41 @@
 </head>
 
 <script>
-    function SelYear() {  
-        var mylistY = document.getElementById("YearList");  
-        document.getElementById("selectedY").value = mylistY.options[mylistY.selectedIndex].text;
-        Filter(); 
-
-    }
-    function SelDuration() {  
-        var mylistD = document.getElementById("DurationList");  
-        document.getElementById("selectedD").value = mylistD.options[mylistD.selectedIndex].text; 
-        Filter(); 
-    }
-    function SelExecutive() {  
-        var mylistE = document.getElementById("ExecutiveList");  
-        document.getElementById("selectedE").value = mylistE.options[mylistE.selectedIndex].text; 
-        myFunction(); 
-    }
-</script>
-
-<script>
-    let ev = [], ev_pr = [], len, y = [], d = [];
+    let y = [], d = [], ex = [];
 
     function Filter() {
-      var inputY, filterY, tableY, inputD, filterD, tableD, tr, td, i, index;
-      inputY = document.getElementById("YearList");
-      filterY = input.value;
-      tableY = document.getElementById("ProjTable");
-      inputD = document.getElementById("DurationList");
-      filterD = input.value;
-      tableD = document.getElementById("ProjTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 1; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            if (filterY == 0 || filterD == 0) {
-                tr[i].style.display = "";
-            }
-            index = (td.textContent || td.innerText) - 1;
-            if ((y[index] == filterY || filterY == 0) && (Math.floor(d[index]/365) == filterD || filterD == 0)) { 
-                tr[i].style.display = "";
-            } 
-            else {
-                tr[i].style.display = "none";
-            }
-        }       
-      }
+        var table, inputY, filterY, inputD, filterD, inputE, filterE, tr, td, i, index;
+        table = document.getElementById("ProjTable");
+        inputY = document.getElementById("YearList");
+        filterY = inputY.value;
+        inputD = document.getElementById("DurationList");
+        filterD = inputD.value;
+        inputE = document.getElementById("ExecutiveList");
+        filterE = inputE.value;
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                index = (td.textContent || td.innerText) - 1;
+                if ((y[index] == filterY || filterY == 0) && (Math.floor(d[index]/365) == filterD || filterD == 0) && (ex[index] == filterE || filterE == 0)) { 
+                    tr[i].style.display = "";
+                } 
+                else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
     }
 
+    function GoToResearchers(r) {
+        var el = r.getElementsByTagName("td")[0];
+        var index = el.textContent || el.innerText;
+        let url = '/dashboard/' + index;
+        window.location = url;
+    }
 </script>
+
+
 
 <body>  
 
@@ -61,82 +48,40 @@
         <script>
             y.push('<%- st_y[i]%>');
             d.push('<%- dur[i]%>');
-            len = i + 1;
+            ex.push('<%- exec[i]%>')
         </script>
     <% } %>
 
     <form>  
     <b> Select year </b>  
-        <select id="YearList" onchange = " SelYear()">
+        <select id="YearList" onchange = " Filter()">
             <option value="0" selected> --Choose year-- </option>
             <% for(var i = 2000; i < 2025; i++) { %>
             <option value='<%= i %>'><%= i %></option>
             <% } %>
         </select>
-    <p> Your selected year is:   
-    <input type = "text" id = "selectedY" size = "20" </p>  
     </form>
     
     <form>  
     <b> Select duration </b>  
-        <select id="DurationList" onchange = " SelDuration()">
+        <select id="DurationList" onchange = " Filter()">
             <option value="0" selected> --Choose duration-- </option>
             <option value="1">1 to 2 years</option>
             <option value="2">2 to 3 years</option>
             <option value="3">3 to 4 years</option>
         </select>
-    <p> Your selected duration is:   
-    <input type = "text" id = "selectedD" size = "20" </p>  
     </form>
 
     <form>  
         <b> Select executive </b>  
-            <select id="ExecutiveList" onchange = " SelExecutive()">
+            <select id="ExecutiveList" onchange = " Filter()">
                 <option value=0 selected> --Choose executive-- </option>
                 <% for(var i = 0; i < eids.length; i++) { %>
                     <option value='<%= eids[i] %>'><%= names[i] %></option>
                     <% } %>
-            </select>
-        <p> Your selected executive is:   
-        <input type = "text" id = "selectedE" size = "20" </p>  
+            </select>  
         </form>  
         
-        <p></p>
-
-        <div class="container">
-            <div class="row" id="row">
-                <div class="col-md-12">
-                    <div class="card" id="card-container">
-                        <div class="card-body" id="card">
-                        <% if (pmids.length == 0) { %> 
-                            <p>No programs found!</p>
-                        <% } else { %>
-                            <div class="table-responsive">
-                                <table class="table" id ="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Program Title</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (var i = 0; i < pmids.length; i++) { %>
-                                            <tr>
-                                                <td><%= pmids[i] %></td>
-                                                <td><%= titles[i] %></td>
-                                            </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <% } %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <p></p>
 
         <div class="container">
@@ -158,7 +103,7 @@
                                     </thead>
                                     <tbody>
                                         <% for (var i = 0; i < prids.length; i++) { %>
-                                            <tr>
+                                            <tr onclick="GoToResearchers(this)">
                                                 <td><%= prids[i] %></td>
                                                 <td><%= pr_titles[i] %></td>
                                             </tr>
