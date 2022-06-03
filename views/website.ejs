@@ -8,10 +8,7 @@
         <meta name="keywords" content="subsidy,reasearch projects" />
 	    <meta name="author" content="Team 32" />
         <meta name="viewport" content="width=device-width; initial-scale=1.0" />
-	    <link rel="icon" href="https://government.gov.gr/wp-content/uploads/2018/02/rsz_logotypo_elidek.png" />
-	    <!-- link to javascript files and libraries -->
-	    <!-- <script type="text/javascript" src="/app.js" ></script>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->	
+	    <link rel="icon" href="https://government.gov.gr/wp-content/uploads/2018/02/rsz_logotypo_elidek.png" />	
     </head>
     <body>
         <img id="backdrop-img" src="static/images/background.jpg" alt="">
@@ -24,18 +21,19 @@
                         <li class="selected">
                             <a href="/">Home Page</a>
                         </li>
-                        <li><a href="/dashboard">Program Dashboard</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/programs">Programs</a></li>
                         <li><a href="#">Relational Views</a>
                             <ul>
-                                <li><a href="/res_sel">Researcher' Projects</a></li>
-                                <li><a href="/org_sel">Organization' Programms</a></li>
+                                <li><a href="/res_view">Researcher' Projects</a></li>
+                                <li><a href="/org_view">Organization' Programms</a></li>
                             </ul>
                         </li>
                         <li><a href="/fields">Scientific Field</a></li>
 			            <li><a href="/annual_proj">Organizations with same number of Projects</a></li>
                         <li><a href="/tuples">Field Cuples</a></li>
 			            <li><a href="/young_res">Young Researchers</a></li>
-			            <li><a href="/executive">Elit of Executives</a></li>
+			            <li><a href="/executives">Elit of Executives</a></li>
 			            <li><a href="/no_del">Researchers in Projects without Deliverables</a></li>
                         <li><a href="#">Contact Us</a>
                             <ul>
@@ -48,9 +46,6 @@
                 </nav>
             </header>
             <div id="site_content">
-                <div class="content">
-                    {%block content %}{% endblock %}
-                </div>
             </div>
         </div>
         <footer>
