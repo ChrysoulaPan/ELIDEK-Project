@@ -6,7 +6,51 @@
     <title> <%= pageTitle %> </title>
 </head>
 
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+}
+</style>
+
 <body>
+    <div id="editModal" class="modal">      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Researcher</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div>
+                        <label for="id"> Researcher ID</label><input type="text" name="id" id="id" readonly></br>
+                        <label for="name"> Researcher name</label><input type="text" name="name" id="name"></br>
+                        <label for="surname"> Researcher surname</label><input type="text" name="surname" id="surname"></br>
+                        <label for="sex"> Researcher sex</label>
+                        <select name="sex" id="sex">
+                            <option>M</option>
+                            <option>F</option>
+                            <option>O</option>
+                        </select></br>
+                        <label for="birth_date"> Researcher birth date (yyyy-mm-dd)</label><input type="text" name="birth_date" id="birth_date"></br>
+                        <label for="work_date"> Starting work date (yyyy-mm-dd)</label><input type="text" name="work_date" id="work_date"></br>
+                        <label for="organization"> Working in organization</label>
+                        <select name="organization" id="organization">
+                            <% for(var i = 0; i < org_id.length; i++) { %>
+                                <option value='<%= org_id[i] %>'><%= org_name[i] %></option>
+                                <% } %>                       
+                         </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button></div>
+          </div>
+      
+    </div>
+    <h2>Researchers</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
@@ -22,8 +66,12 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Surname</th>
-                                        <th>Birth Date</th>
-                                        <th></th>
+                                        <th>Sex</th>
+                                        <th>Birth date</th>
+                                        <th>Work date</th>
+                                        <th>Organization ID</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,7 +80,16 @@
                                             <td><%= researcher.researcher_id %></td>
                                             <td><%= researcher.researcher_name %></td>
                                             <td><%= researcher.researcher_surname %></td>
+                                            <td><%= researcher.sex %></td>
                                             <td><%= researcher.birth_date %></td>
+                                            <td><%= researcher.work_date %></td>
+                                            <td><%= researcher.org_id %></td>
+                                            <td onclick="ShowModal(this.parentNode)">Update</td> 
+                                            <form method="POST" action="/researchers/delete/<%= researcher.researcher_id %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit">Delete</button>
+                                                </td>
+                                            </form>
                                         </tr>
                                     <% }) %>
                                 </tbody>
@@ -44,5 +101,38 @@
             </div>
         </div>
     </div>
-    <button onclick="window.history.back()">Back to Home</button>
+
+    <script>
+        function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+            var el = row.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            setModalFields(row);
+        }
+
+        function setModalFields(row) {
+            var index = row.getElementsByTagName("td")[0].textContent;
+            document.getElementById("id").value = index;  
+            document.getElementById("name").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("surname").value = row.getElementsByTagName("td")[2].textContent;
+            document.getElementById("sex").value = row.getElementsByTagName("td")[3].textContent;
+            document.getElementById("birth_date").value = row.getElementsByTagName("td")[4].textContent;
+            document.getElementById("work_date").value = row.getElementsByTagName("td")[5].textContent;
+            document.getElementById("organization").value = row.getElementsByTagName("td")[6].textContent;
+            document.getElementById("modal-form").action = "/researchers/update/" + index;
+            document.getElementById("modal-form").method = "POST";
+        }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/researchers/create";
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+
 </body>
+</html>
