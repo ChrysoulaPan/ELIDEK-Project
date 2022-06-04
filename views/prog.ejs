@@ -29,11 +29,14 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" form="modal-form" class="btn btn-success">Update</button>            </div>
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button>            </div>
             </div>
       
     </div>
     <h2>Programs</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
@@ -79,6 +82,7 @@
 
     <script>
         function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
             var modal = document.getElementById("editModal");
             modal.style.display = "block";
             var el = row.getElementsByTagName("td")[0];
@@ -89,10 +93,21 @@
         function setModalFields(row) {
             var index = row.getElementsByTagName("td")[0].textContent;
             document.getElementById("id").value = index;  
+            document.getElementById("title").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("department").value = row.getElementsByTagName("td")[2].textContent;
             document.getElementById("modal-form").action = "/prog/update/" + index;
             document.getElementById("modal-form").method = "POST";
         }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/prog/create";
+            document.getElementById("modal-form").method = "POST";
+        }
     </script>
+    <a href = "/"> Back to Home</a>
 
 </body>
 </html>
