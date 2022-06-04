@@ -115,6 +115,13 @@
         function setModalFields(row) {
             var index = row.getElementsByTagName("td")[0].textContent;
             document.getElementById("id").value = index;  
+            document.getElementById("abbreviation").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("name").value = row.getElementsByTagName("td")[2].textContent;
+            document.getElementById("road").value = row.getElementsByTagName("td")[3].textContent;
+            document.getElementById("number").value = row.getElementsByTagName("td")[4].textContent;
+            document.getElementById("postcode").value = row.getElementsByTagName("td")[5].textContent;
+            document.getElementById("city").value = row.getElementsByTagName("td")[6].textContent;
+            document.getElementById("category").value = row.getElementsByTagName("td")[7].textContent;
             document.getElementById("modal-form").action = "/organizations/update/" + index;
             document.getElementById("modal-form").method = "POST";
         }
