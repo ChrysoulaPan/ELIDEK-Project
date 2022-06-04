@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> <%= pageTitle %> </title>
+</head>
+
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+}
+</style>
+
+<body>
+    <div id="editModal" class="modal">      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Executives</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div>
+                        <label for="id"> Executive ID</label><input type="text" name="id" id="id" readonly></br>
+                        <label for="name"> Executive name</label><input type="text" name="name" id="name"></br>
+                        <label for="surname"> Executive surname</label><input type="text" name="surname" id="surname"></br>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button>            </div>
+            </div>
+      
+    </div>
+    <h2>Executives</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (exec.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No executives found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% exec.forEach((exec, _) => { %>
+                                        <tr>
+                                            <td><%= exec.executive_id %></td>
+                                            <td><%= exec.ex_name %></td>
+                                            <td><%= exec.ex_surname %></td>
+                                            <td onclick="ShowModal(this.parentNode)">Update</td> 
+                                            <form method="POST" action="/exec/delete/<%= exec.executive_id %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit">Delete</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+            var el = row.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            setModalFields(row);
+        }
+
+        function setModalFields(row) {
+            var index = row.getElementsByTagName("td")[0].textContent;
+            document.getElementById("id").value = index;  
+            document.getElementById("name").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("surname").value = row.getElementsByTagName("td")[2].textContent;
+            document.getElementById("modal-form").action = "/exec/update/" + index;
+            document.getElementById("modal-form").method = "POST";
+        }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/exec/create";
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+    <a href = "/"> Back to Home</a>
+
+</body>
+</html>
