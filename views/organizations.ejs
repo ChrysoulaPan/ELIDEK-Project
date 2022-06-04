@@ -64,6 +64,7 @@
                                         <th>Postcode</th>
                                         <th>City</th>
                                         <th>Category</th>
+                                        <th>Phone Numbers</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                     </tr>
@@ -79,6 +80,7 @@
                                             <td><%= org.postcode %></td>
                                             <td><%= org.city %></td>
                                             <td><%= org.category %></td>
+                                            <td onclick="GoToPhones(this.parentNode)">Phone Numbers</td>
                                             <td onclick="ShowModal(this.parentNode)">Update</td> 
                                             <form method="POST" action="/organizations/delete/<%= org.org_id %>">
                                                 <td> 
@@ -112,6 +114,13 @@
             document.getElementById("modal-form").action = "/organizations/update/" + index;
             document.getElementById("modal-form").method = "POST";
         }
+
+        function GoToPhones(r) {
+            var el = r.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            let url = '/organizations/phones/' + index;
+            window.location = url;
+    }
     </script>
 
 </body>
