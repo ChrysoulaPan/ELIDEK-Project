@@ -46,7 +46,7 @@ exports.postUpdateOrganization = (req, res, next) => {
             res.redirect('/organizations');
         })
         .catch(err => {
-            res.redirect('/organizations');
+            res.render('error.ejs');
         })
     })
 }
@@ -65,7 +65,7 @@ exports.postDeleteOrganization = (req, res, next) => {
             res.redirect('/organizations');
         })
         .catch(err => {
-            res.redirect('/organizations');
+            res.render('error.ejs');
         })
     })
 
