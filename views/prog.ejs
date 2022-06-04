@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> <%= pageTitle %> </title>
+</head>
+
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+}
+</style>
+
+<body>
+    <div id="editModal" class="modal">      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Programs</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div>
+                        <label for="id"> Program ID</label><input type="text" name="id" id="id" readonly></br>
+                        <label for="title"> Program title</label><input type="text" name="title" id="title"></br>
+                        <label for="department"> Department</label><input type="text" name="department" id="department"></br>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="modal-form" class="btn btn-success">Update</button>            </div>
+            </div>
+      
+    </div>
+    <h2>Programs</h2>
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (prog.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No programs found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Department</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% prog.forEach((prog, _) => { %>
+                                        <tr>
+                                            <td><%= prog.program_id %></td>
+                                            <td><%= prog.program_title %></td>
+                                            <td><%= prog.department %></td>
+                                            <td onclick="ShowModal(this.parentNode)">Update</td> 
+                                            <form method="POST" action="/prog/delete/<%= prog.program_id %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit">Delete</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowModal(row) {
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+            var el = row.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            setModalFields(row);
+        }
+
+        function setModalFields(row) {
+            var index = row.getElementsByTagName("td")[0].textContent;
+            document.getElementById("id").value = index;  
+            document.getElementById("modal-form").action = "/prog/update/" + index;
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+
+</body>
+</html>
