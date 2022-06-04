@@ -39,11 +39,14 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" form="modal-form" class="btn btn-success">Update</button>            </div>
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button></div>
           </div>
       
     </div>
     <h2>Organizations</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
     <div class="container">
         <div class="row" id="row">
             <div class="col-md-12">
@@ -101,6 +104,7 @@
 
     <script>
         function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
             var modal = document.getElementById("editModal");
             modal.style.display = "block";
             var el = row.getElementsByTagName("td")[0];
@@ -120,7 +124,15 @@
             var index = el.textContent || el.innerText;
             let url = '/organizations/phones/' + index;
             window.location = url;
-    }
+        }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/organizations/create";
+            document.getElementById("modal-form").method = "POST";
+        }
     </script>
 
 </body>
