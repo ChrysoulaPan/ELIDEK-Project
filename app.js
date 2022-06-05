@@ -4,6 +4,7 @@ const path = require('path');
 
 //import routes
 const researchers = require('./router/researchers');
+const del = require('./router/del');
 const project = require('./router/project');
 const executives = require('./router/executives');
 const young_res = require('./router/young_res');
@@ -32,6 +33,7 @@ app.set('views', 'views');
 //import middlewares
 app.get('/', (req, res) => res.render('website.ejs'));  
 app.use('/researchers', researchers);
+app.use('/del', del);
 app.use('/project', project);
 app.use('/executives', executives);
 app.use('/young_res', young_res);
