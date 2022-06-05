@@ -6,7 +6,7 @@ exports.getProject = (req, res, next) => {
     /* create the connection, execute query, render data */
     pool.getConnection((err, conn) => {
 
-        let orgid_array = [], orgname_array = [], progid_array = [], progtitle_array = [], execid_array = [], execsurname_array = [], supid_array = [], supsurname_array = [], evalid_array = [], evalsurname_array = [];
+        let orgid_array = [], orgname_array = [], progid_array = [], progtitle_array = [], execid_array = [], execsurname_array = [], supid_array = [], evalid_array = [];
 
 
         const setOutput1 = (rows) => {
@@ -30,21 +30,19 @@ exports.getProject = (req, res, next) => {
         const setOutput4 = (rows) => {
             for (var i = 0; i < rows.length; i++) {
                 supid_array.push(rows[i].sup_researcher_id);
-                suplsurname_array.push(rows[i].researcher_surname);
             }
         }
         const setOutput5 = (rows) => {
             for (var i = 0; i < rows.length; i++) {
                 evalid_array.push(rows[i].eval_researcher_id);
-                evalsurname_array.push(rows[i].researcher_surname);
             }
         }
 
         const get_org = 'select org_id, org_name from org';
         const get_prog = 'select program_id, program_title from program';
         const get_exec = 'select executive_id, ex_surname from executive';
-        const get_supres = 'select sup_researcher_id, researcher_surname from researcher';
-        const get_evalres = 'select eval_researcher_id, researcher_surname from researcher';
+        const get_supres = 'select sup_researcher_id from project';
+        const get_evalres = 'select eval_researcher_id from project';
 
 
         conn.query(get_org, (err, rows) => {
@@ -95,9 +93,7 @@ exports.getProject = (req, res, next) => {
                 executive_id: execid_array,
                 ex_surname: execsurname_array,
                 sup_researcher_id: supid_array,
-                sup_surname: supsurname_array,
                 eval_researcher_id: evalid_array,
-                eval_surname: evalsurname_array
             })
         })
         .then(() => pool.releaseConnection(conn))
@@ -120,8 +116,8 @@ exports.postUpdateProject = (req, res, next) => {
     const organization = req.body.organization;
     const program = req.body.program;
     const executive = req.body.executive;
-    const supres = req.body.researcher;
-    const evalres = req.body.researcher;
+    const supres = req.body.supres;
+    const evalres = req.body.evalres;
 
     pool.getConnection((err, conn) => {
         var sqlQuery = `UPDATE project SET project_title = ?, summry = ?, fund_ammount = ? \
@@ -175,8 +171,8 @@ exports.postProject = (req, res, next) => {
     const organization = req.body.organization;
     const program = req.body.program;
     const executive = req.body.executive;
-    const supres = req.body.researcher;
-    const evalres = req.body.researcher;
+    const supres = req.body.supres;
+    const evalres = req.body.evalres;
 
     pool.getConnection((err, conn) => {
         var sqlQuery = `INSERT INTO project(project_title, summary, fund_ammount, end_date, duration, evaluation_date, evaluation_grade, org_id, program_id, executive_id, sup_researcher_id, eval_researcher_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
