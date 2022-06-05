@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> <%= pageTitle %> </title>
+</head>
+
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+}
+</style>
+
+<body>
+    <div id="editModal" class="modal">      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Project</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div>
+                        <label for="id"> Project ID</label><input type="text" name="id" id="id" readonly></br>
+                        <label for="title"> Project title</label><input type="text" name="title" id="title"></br>
+                        <label for="summary"> Project summary</label><input type="text" name="summary" id="summary"></br>
+                        <label for="fund_ammount"> Project fund ammount</label><input type="text" name="fund_ammount" id="fund_ammount"></br>
+                        <label for="end_date"> Project end date (yyyy-mm-dd)</label><input type="text" name="end_date" id="end_date"></br>
+                        <label for="duration"> Project duration</label><input type="text" name="duration" id="duration"></br>
+                        <label for="evaluation_date"> Project evaluation date (yyyy-mm-dd)</label><input type="text" name="evaluation_date" id="evaluation_date"></br>
+                        <label for="evaluation_grade"> Project grade</label><input type="text" name="evaluation_grade" id="evaluation_grade"></br>
+                        <label for="organization"> Belongs to organization</label>
+                        <select name="organization" id="organization">
+                            <% for(var i = 0; i < org_id.length; i++) { %>
+                                <option value='<%= org_id[i] %>'><%= org_name[i] %></option>
+                                <% } %>                       
+                        </select>
+                        <label for="program"> Belongs to program</label>
+                        <select name="program" id="program">
+                            <% for(var i = 0; i < program_id.length; i++) { %>
+                                <option value='<%= program_id[i] %>'><%= program_title[i] %></option>
+                                <% } %>                       
+                        </select>
+                        <label for="executive"> Executive</label>
+                        <select name="executive" id="executive">
+                            <% for(var i = 0; i < executive_id.length; i++) { %>
+                                <option value='<%= executive_id[i] %>'><%= ex_surname[i] %></option>
+                                <% } %>                       
+                        </select>
+                        <label for="executive"> Supervisor</label>
+                        <select name="supres" id="supres">
+                            <% for(var i = 0; i < sup_researcher_id.length; i++) { %>
+                                <option value='<%= sur_researcher_id[i] %>'><%= researcher_surname[i] %></option>
+                                <% } %>                       
+                        </select>
+                        <label for="executive"> Evaluator</label>
+                        <select name="evalres" id="evalres">
+                            <% for(var i = 0; i < eval_researcher_id.length; i++) { %>
+                                <option value='<%= eval_researcher_id[i] %>'><%= researcher_surname[i] %></option>
+                                <% } %>                       
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button></div>
+          </div>
+      
+    </div>
+    <h2>Projects</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (project.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No projects found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Summary</th>
+                                        <th>Fund Ammount</th>
+                                        <th>End date</th>
+                                        <th>Duration</th>
+                                        <th>Evaluation Date</th>
+                                        <th>Evaluation Grade</th>
+                                        <th>Organization ID</th>
+                                        <th>Program ID</th>
+                                        <th>Executive ID</th>
+                                        <th>Supervisor ID</th>
+                                        <th>Evaluator ID</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% project.forEach((project, _) => { %>
+                                        <tr>
+                                            <td><%= project.projecgt_id %></td>
+                                            <td><%= project.title %></td>
+                                            <td><%= project.summary %></td>
+                                            <td><%= project.fund_ammount %></td>
+                                            <td><%= project.end_date %></td>
+                                            <td><%= project.duration %></td>
+                                            <td><%= project.evaluation_date %></td>
+                                            <td><%= project.evaluation_grade %></td>
+                                            <td><%= project.org_id %></td>
+                                            <td><%= project.program_id %></td>
+                                            <td><%= project.executive_id %></td>
+                                            <td><%= project.sup_researcher_id %></td>
+                                            <td><%= project.eval_researcher_id %></td>
+                                            <td onclick="ShowModal(this.parentNode)">Update</td> 
+                                            <form method="POST" action="/project/delete/<%= project.project_id %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit">Delete</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+            var el = row.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            setModalFields(row);
+        }
+
+        function setModalFields(row) {
+            var index = row.getElementsByTagName("td")[0].textContent;
+            document.getElementById("id").value = index;  
+            document.getElementById("title").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("summary").value = row.getElementsByTagName("td")[2].textContent;
+            document.getElementById("fund_ammount").value = row.getElementsByTagName("td")[3].textContent;
+            document.getElementById("end_date").value = row.getElementsByTagName("td")[4].textContent;
+            document.getElementById("duration").value = row.getElementsByTagName("td")[5].textContent;
+            document.getElementById("evaluation_date").value = row.getElementsByTagName("td")[6].textContent;
+            document.getElementById("evaluation_grade").value = row.getElementsByTagName("td")[7].textContent;
+            document.getElementById("organization").value = row.getElementsByTagName("td")[8].textContent;
+            document.getElementById("program").value = row.getElementsByTagName("td")[9].textContent;
+            document.getElementById("executive").value = row.getElementsByTagName("td")[10].textContent;
+            document.getElementById("supres").value = row.getElementsByTagName("td")[11].textContent;
+            document.getElementById("evalres").value = row.getElementsByTagName("td")[12].textContent;
+            document.getElementById("modal-form").action = "/project/update/" + index;
+            document.getElementById("modal-form").method = "POST";
+        }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/project/create";
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+    <a href = "/"> Back to Home</a>
+
+</body>
+</html>
