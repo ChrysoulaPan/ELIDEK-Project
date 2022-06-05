@@ -51,13 +51,13 @@
                         <label for="executive"> Supervisor</label>
                         <select name="supres" id="supres">
                             <% for(var i = 0; i < sup_researcher_id.length; i++) { %>
-                                <option value='<%= sur_researcher_id[i] %>'><%= researcher_surname[i] %></option>
+                                <option value='<%=sup_researcher_id[i] %>'></option>
                                 <% } %>                       
                         </select>
                         <label for="executive"> Evaluator</label>
                         <select name="evalres" id="evalres">
                             <% for(var i = 0; i < eval_researcher_id.length; i++) { %>
-                                <option value='<%= eval_researcher_id[i] %>'><%= researcher_surname[i] %></option>
+                                <option value%='<%=eval_researcher_id[i] %>'></option>
                                 <% } %>                       
                         </select>
                     </div>
@@ -104,8 +104,8 @@
                                 <tbody>
                                     <% project.forEach((project, _) => { %>
                                         <tr>
-                                            <td><%= project.projecgt_id %></td>
-                                            <td><%= project.title %></td>
+                                            <td><%= project.project_id %></td>
+                                            <td><%= project.project_title %></td>
                                             <td><%= project.summary %></td>
                                             <td><%= project.fund_ammount %></td>
                                             <td><%= project.end_date %></td>

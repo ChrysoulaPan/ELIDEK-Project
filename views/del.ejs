@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> <%= pageTitle %> </title>
+</head>
+
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+}
+</style>
+
+<body>
+    <div id="editModal" class="modal">      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Deliverbale</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div>
+                        <label for="id"> Deliverable ID</label><input type="text" name="id" id="id" readonly></br>
+                        <label for="title"> Deliverable title</label><input type="text" name="title" id="title"></br>
+                        <label for="summary"> Deliverable summary</label><input type="text" name="summary" id="summary"></br>
+                        <label for="end_date"> Deliverable deadline (yyyy-mm-dd)</label><input type="text" name="end_date" id="end_date"></br>
+                        <label for="project"> Concerns Project</label>
+                        <select name="project" id="project">
+                            <% for(var i = 0; i < project_id.length; i++) { %>
+                                <option value='<%= project_id[i] %>'><%= project_title[i] %></option>
+                                <% } %>                       
+                         </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id = "ActionButton" type="submit" form="modal-form" class="btn btn-success">Update</button></div>
+          </div>
+      
+    </div>
+    <h2>Deliverables</h2>
+
+    <button onclick="ShowInputFields()">Insert new</button>
+
+    <div class="container">
+        <div class="row" id="row">
+            <div class="col-md-12">
+                <div class="card" id="card-container">
+                    <div class="card-body" id="card">
+                    <% if (deliverable.length == 0) { %> 
+                        <h1 style="margin-top: 5rem;">No deliverables found!</h1>
+                    <% } else { %>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Summary</th>
+                                        <th>End date</th>
+                                        <th>Project ID</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% deliverable.forEach((deliverable, _) => { %>
+                                        <tr>
+                                            <td><%= deliverable.del_id %></td>
+                                            <td><%= deliverable.del_title %></td>
+                                            <td><%= deliverable.del_summary %></td>
+                                            <td><%= deliverable.end_date %></td>
+                                            <td><%= deliverable.project_id %></td>
+                                            <td onclick="ShowModal(this.parentNode)">Update</td> 
+                                            <form method="POST" action="/del/delete/<%= deliverable.del_id %>">
+                                                <td> 
+                                                    <button style="all: unset; cursor: pointer;" type="submit">Delete</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowModal(row) {
+            document.getElementById("ActionButton").innerHTML="Update";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block";
+            var el = row.getElementsByTagName("td")[0];
+            var index = el.textContent || el.innerText;
+            setModalFields(row);
+        }
+
+        function setModalFields(row) {
+            var index = row.getElementsByTagName("td")[0].textContent;
+            document.getElementById("id").value = index;  
+            document.getElementById("title").value = row.getElementsByTagName("td")[1].textContent;
+            document.getElementById("summary").value = row.getElementsByTagName("td")[2].textContent;
+            document.getElementById("end_date").value = row.getElementsByTagName("td")[3].textContent;
+            document.getElementById("project").value = row.getElementsByTagName("td")[4].textContent;
+            document.getElementById("modal-form").action = "/del/update/" + index;
+            document.getElementById("modal-form").method = "POST";
+        }
+
+        function ShowInputFields() {
+            document.getElementById("ActionButton").innerHTML="Insert";
+            var modal = document.getElementById("editModal");
+            modal.style.display = "block"
+            document.getElementById("modal-form").action = "/del/create";
+            document.getElementById("modal-form").method = "POST";
+        }
+    </script>
+    <a href = "/"> Back to Home</a>
+
+</body>
+</html>
