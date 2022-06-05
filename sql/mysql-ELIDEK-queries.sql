@@ -1,5 +1,3 @@
--- 28/05 Version
-
 use ELIDEK;
 
 

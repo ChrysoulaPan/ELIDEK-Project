@@ -1,6 +1,7 @@
--- 28/05 Version
-
 use ELIDEK;
+
+set sql_safe_updates = 0;
+set foreign_key_checks = 0;
 
 delete from deliverable;
 delete from project;
@@ -475,7 +476,7 @@ values
 (41, 3), (41, 7), (41, 8), (41, 11), (42, 4), (42, 6), (42, 9), (43, 2), (43, 6), (43, 10), (44, 5), (44, 7), (44, 9), (50, 1), (50, 4), (50, 7),
 (51, 3), (51, 12), (51, 9), (52, 6), (52, 8), (52, 10), (52, 11), (53, 2), (53, 12), (53, 9), (53, 11), (54, 2), (54, 5), (54, 12), (55, 1), (55, 7), (55, 10),
 (56, 1), (56, 3), (56, 8), (56, 11), (57, 2), (57, 4), (57, 8), (57, 10), (58, 5), (58, 10), (58, 6), (59, 1), (59, 2), (59, 3), (60, 2), (60, 7), (60, 9), (60, 11), (61, 3),
-(61, 4), (61, 8), (62, 9), (62, 10), (62, 1), (63, 6), (63, 7), (63, 12), (64, 12), (64, 5), (64, 7), (65, 3), (65, 8), (65, 11), (66, 6), (66, 8), (66, 9), (67, 5), (67, 4)
+(61, 4), (61, 8), (62, 9), (62, 10), (62, 1), (63, 6), (63, 7), (63, 12), (64, 12), (64, 5), (64, 7), (65, 3), (65, 8), (65, 11), (66, 6), (66, 8), (66, 9), (67, 5), (67, 4),
 (67, 10), (68, 1), (68, 2), (68, 3), (68, 4), (69, 5), (69, 8), (69, 11), (70, 6), (70, 12);
 
 insert into university (university_id, org_id, budget) 
@@ -563,7 +564,7 @@ insert into project (project_id, project_title, summary, fund_ammount, start_dat
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (99, 'Joise', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (100, 'Jdjsn', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (101, 'Uhska', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
-insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (102, Fjsboa', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
+insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (102, 'Fjsboa', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 insert into project (project_id, project_title, summary, fund_ammount, start_date, end_date, sup_researcher_id, org_id, program_id, executive_id, eval_researcher_id, evaluation_grade, evaluation_date) values (103, 'Kswwdns', 'gia to 3.4', 339993.17, '2019-06-30', '2021-08-03', 69, 25, 10, 12, 90, 2.8, '2020-07-12');
 
 insert into researcher_works_on (researcher_id, project_id) 
