@@ -297,6 +297,18 @@ create trigger `upd_del_date` before update on `deliverable` for each row begin
     end if; 
   end;;  
 
+create trigger `upd_res_org` before update on `researcher` for each row begin
+	declare or1 int unsigned;
+	select p.org_id
+	into or1
+	from active_projects p
+	where p.sup_researcher_id = new.researcher_id
+	if new.org_id <> or1 then 
+        signal sqlstate '45000' 
+	    set message_text = 'Cannot update this relationship';
+	end if;
+end;;
+
 delimiter ;
 
 set sql_mode=@old_sql_mode;
