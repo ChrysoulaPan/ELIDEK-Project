@@ -1,7 +1,7 @@
 use ELIDEK;
 
-set sql_safe_updates = 0;
-set foreign_key_checks = 0;
+-- set sql_safe_updates = 0;
+-- set foreign_key_checks = 0;
 
 delete from deliverable;
 delete from project;
