@@ -4,6 +4,7 @@ const path = require('path');
 
 //import routes
 const researchers = require('./router/researchers');
+const project = require('./router/project');
 const executives = require('./router/executives');
 const young_res = require('./router/young_res');
 const no_del = require('./router/no_del');
@@ -31,9 +32,10 @@ app.set('views', 'views');
 //import middlewares
 app.get('/', (req, res) => res.render('website.ejs'));  
 app.use('/researchers', researchers);
+app.use('/project', project);
 app.use('/executives', executives);
 app.use('/young_res', young_res);
-app.use('/nodeliverables', no_del);
+app.use('/no_del', no_del);
 app.use('/fields', fields);
 app.use('/annual_proj', annual);
 app.use('/tuples', tuples);
