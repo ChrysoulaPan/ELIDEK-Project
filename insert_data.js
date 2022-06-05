@@ -1,7 +1,7 @@
 const { pool } = require('./config/config');
 const fs = require('fs');
 
-const dataSQL = fs.readFileSync("./sql/mysql-ELIDEK-insert-all.sql").toString();
+const dataSQL = fs.readFileSync("./sql/mysql-ELIDEK-insert.sql").toString();
 
 pool.getConnection((err, conn) => {
     conn.promise().query(dataSQL)
